@@ -4,16 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
-
+use App\Models\Category;
 
 class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    private $post;
+    private $category;
+    public function index(Post $post, Category $category)
     {
         //
+        $this->post = $post;
+        $this->category = $category;
     }
 
     /**
@@ -22,8 +26,10 @@ class PostController extends Controller
     public function create()
     {
         //
+        $all_categories = Category::all();
 
-        return view('users.posts.create');
+        return view('users.posts.create')
+                ->with('all_categories', $all_categories);
     }
 
     /**
