@@ -3,7 +3,7 @@
 @section('title', 'Create post')
 
 @section('content')
-    <form action="" method="post" enctype="multipart/form-data">
+    <form action="{{route('post.store')}}" method="post" enctype="multipart/form-data">
         {{-- JSON: javascript object notation --}}
         @csrf
         <div class="mb-3">
@@ -12,7 +12,7 @@
             </label>
             @foreach ($all_categories as $category)
             <div class="form-check form-check-inline">
-                <input type="checkbox" name="category" id="{{$category->name}}" value="{{$category->id}}" class="form-check-input">
+                <input type="checkbox" name="category[]" id="{{$category->name}}" value="{{$category->id}}" class="form-check-input">
                 <label for="{{$category->name}}" class="form-check-label"> {{$category->name}} </label>
             </div>
             @endforeach
