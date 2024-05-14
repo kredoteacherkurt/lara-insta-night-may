@@ -26,6 +26,7 @@
         </div>
         <div class="col-4 bg-secondary">
             Suggested users location
+            {{-- im really handsome --}}
         </div>
     </div>
 @endsection
