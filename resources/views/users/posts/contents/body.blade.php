@@ -1,5 +1,7 @@
 <div class="container p-0">
-    <img src="{{ $post->image }}" alt="" class="w-100">
+    <a href="{{route('post.show',$post->id)}}">
+        <img src="{{ $post->image }}" alt="" class="w-100">
+    </a>
 </div>
 <div class="card-body">
     <div class="row align-items-center">
@@ -28,9 +30,9 @@
 
     </div>
     {{-- owner + description --}}
-    <a href="#" class="text-decoration-none text-dark fw-bold">{{$post->user->name}}</a>
-    <p class="d-inline fw-light">{{$post->description}}</p>
-    <p class="text-muted small">{{$post->created_at->diffForHumans()}}</p>
+    <a href="#" class="text-decoration-none text-dark fw-bold">{{ $post->user->name }}</a>
+    <p class="d-inline fw-light">{{ $post->description }}</p>
+    <p class="text-muted small">{{ $post->created_at->diffForHumans() }}</p>
 
     {{-- comments here --}}
 </div>
