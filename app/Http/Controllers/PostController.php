@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\CategoryPost;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
@@ -67,17 +68,54 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Post $post)
+    public function edit($id)
     {
         //
+
+        $all_categories = Category::all();
+        $post = $this->post->findOrFail($id);
+
+
+        $selected_categories = [];
+        foreach($post->categoryPost as $category_post){
+            $selected_categories[] = $category_post->category->id;
+        }
+
+
+        return view('users.posts.edit')
+                    ->with('post', $post)
+                    ->with('all_categories', $all_categories)
+                    ->with('selected_categories', $selected_categories);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, $id)
     {
         //
+
+        $post = $this->post->findOrFail($id);
+        // if($post->user_id != Auth::id()){
+        //     return redirect()->route('index');
+        // }
+
+        $post->description = $request->description;
+        if($request->image){
+            $post->image = 'data:image/' . $request->image->extension() . ';base64,' . base64_encode(file_get_contents($request->image));
+        }
+        $post->save();
+
+
+        // re writes your index array into associative array
+       foreach($request->category as $category_id){
+        $category_post[] = ["category_id" => $category_id];
+       }
+       $post->categoryPost()->delete();
+
+       $post->categoryPost()->createMany($category_post);
+
+       return redirect()->route('post.show',$id);
     }
 
     /**

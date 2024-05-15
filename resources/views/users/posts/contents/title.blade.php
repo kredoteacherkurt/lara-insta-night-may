@@ -21,7 +21,7 @@
 
                 <div class="dropdown-menu">
                     @if (Auth::id() === $post->user->id)
-                        <a href="#" class="dropdown-item">
+                        <a href="{{route('post.edit',$post->id)}}" class="dropdown-item">
                             <i class="fa-solid fa-pen-to-square"></i> Edit
                         </a>
                         <button class="dropdown-item text-danger" data-bs-toggle="modal"
