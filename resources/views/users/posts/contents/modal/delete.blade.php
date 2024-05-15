@@ -12,7 +12,7 @@
                 <img src="{{$post->image}}" alt="" class="img-thumbnail">
             </div>
             <div class="modal-footer">
-                <form action="" method="post">
+                <form action="{{route('post.destroy',$post->id)}}" method="post">
                     @method('DELETE')
                     @csrf
 

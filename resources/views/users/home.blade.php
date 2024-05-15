@@ -17,7 +17,7 @@
                 <div class="text-center">
                     <h2>Share photos</h2>
                     <p class="text-muted">
-                        When you share photos, they'll appear on your profile <a href="{{route('post.create')}}" class="text-decoration-none">
+                        When you share photos, they'll appear on your profile <br><a href="{{route('post.create')}}" class="text-decoration-none">
                             Share your first photo
                     </a>
                 </p>
