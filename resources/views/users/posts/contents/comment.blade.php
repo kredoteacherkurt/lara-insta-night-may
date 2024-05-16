@@ -17,8 +17,8 @@
                             <button type="submit" class="border-0 btn text-danger shadow-none p-0">Delete</button>
                         @endif
                     </form>
-                    @if ($loop->last)
-                <li class="list-group-item border-0 p-0 mb-2">
+                    @if ($loop->last AND $post->comments->count() > 3)
+                        <li class="list-group-item border-0 p-0 mb-2">
                     <a href="" class="text-decoration-none">View all comments ({{$post->comments->count()}}) </a>
                 </li>
             @endif
