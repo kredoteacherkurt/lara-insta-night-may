@@ -35,4 +35,5 @@
     <p class="text-muted small">{{ $post->created_at->diffForHumans() }}</p>
 
     {{-- comments here --}}
+    @include('users.posts.contents.comment')
 </div>
