@@ -1,5 +1,5 @@
 <div class="container p-0">
-    <a href="{{route('post.show',$post->id)}}">
+    <a href="{{ route('post.show', $post->id) }}">
         <img src="{{ $post->image }}" alt="" class="w-100">
     </a>
 </div>
@@ -7,17 +7,27 @@
     <div class="row align-items-center">
         <div class="col-auto">
             {{-- heart button --}}
-            <form action="" method="post">
-                @csrf
+            @if ($post->isLiked())
+                <form action="{{route('like.destroy',$post->id)}}" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn shadow-none p-0">
+                        <i class="fa-solid text-danger fa-heart"></i>
+                    </button>
+                </form>
+            @else
+                <form action="{{ route('like.store', $post->id) }}" method="post">
+                    @csrf
 
-                <button type="submit" class="btn shadow-none p-0">
-                    <i class="fa-regular fa-heart"></i>
-                </button>
-            </form>
+                    <button type="submit" class="btn shadow-none p-0">
+                        <i class="fa-regular fa-heart"></i>
+                    </button>
+                </form>
+            @endif
         </div>
         <div class="col-auto px-0">
             {{-- likes counter --}}
-            <span>3</span>
+            <span>{{ $post->likes->count() }}</span>
         </div>
         <div class="col text-end">
             {{-- categories --}}

@@ -3,6 +3,7 @@
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ProfileController;
 
 Auth::routes();
@@ -30,6 +31,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/edit',[ProfileController::class,'edit'])->name('edit');
         Route::patch('/update',[ProfileController::class,'update'])->name('update');
 
+    });
+    Route::group(["as"=>"like.", "prefix"=>"like"], function () {
+        Route::post('/store/{id}',[LikeController::class, 'store'])->name('store');
+        Route::delete('/destroy/{id}',[LikeController::class, 'destroy'])->name('destroy');
     });
 
 });
