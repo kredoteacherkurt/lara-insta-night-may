@@ -8,6 +8,7 @@
             @forelse ($all_posts as $post)
                 <div class="card mb-4">
                     {{-- title  --}}
+
                     @include('users.posts.contents.title')
 
                     {{-- body --}}
