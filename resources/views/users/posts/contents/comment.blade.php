@@ -4,7 +4,7 @@
         <ul class="list-group mt-2">
             @foreach ($post->comments->take(3) as $comment)
                 <li class="list-group-item border-0 p-0 mb-2">
-                    <a href="#" class="text-decoration-none text-dark fw-bold"> {{ $comment->user->name }} </a>
+                    <a href="{{route('profile.show',$comment->user->id)}}" class="text-decoration-none text-dark fw-bold"> {{ $comment->user->name }} </a>
                     &nbsp;
                     <p class="d-inline fw-light">{{ $comment->body }}</p>
                     <form action="{{ route('comment.destroy', $comment->id) }}" method="post">

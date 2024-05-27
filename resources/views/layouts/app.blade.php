@@ -13,7 +13,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/style.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <!-- Scripts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
@@ -63,7 +63,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{route('post.create')}}" class="nav-link">
+                                <a href="{{ route('post.create') }}" class="nav-link">
                                     <i class="fa-solid fa-circle-plus text-dark icon-sm"></i>
                                 </a>
                             </li>
@@ -71,7 +71,8 @@
                                 <a id="navbarDropdown" class="nav-link " href="#" role="button"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     @if (Auth::user()->avatar)
-                                        <img src="{{Auth::user()->avatar}}" alt="" class="rounded-circle avatar-sm">
+                                        <img src="{{ Auth::user()->avatar }}" alt=""
+                                            class="rounded-circle avatar-sm">
                                     @else
                                         <i class="fa-solid fa-circle-user text-dark icon-sm"></i>
                                     @endif
@@ -80,13 +81,19 @@
 
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a href="{{route('profile.show',Auth::id())}}" class="dropdown-item">
+                                    <a href="{{ route('admin.users.index') }}" class="dropdown-item">
+                                        <i class="fa-solid fa-user-gear"></i> Admin
+                                    </a>
+                                    <hr class="dropdown-divider">
+
+                                    <a href="{{ route('profile.show', Auth::id()) }}" class="dropdown-item">
                                         <i class="fa-solid fa-circle-user"></i> Profile
                                     </a>
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                     <i class="fa-solid fa-right-from-bracket"></i>   {{ __('Logout') }}
+                                        <i class="fa-solid fa-right-from-bracket"></i> {{ __('Logout') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -103,7 +110,27 @@
         <main class="py-5">
             <div class="container">
                 <div class="row justify-content-center">
-                    {{-- <div class="col-3">Admin controls </div> --}}
+
+                    {{-- @if (Auth::check())
+                        @if (Auth::user()->id == 1)
+                            <div class="col-3">
+                                <div class="list-group">
+                                    <a href="" class="list-group-item">Users</a>
+                                    <a href="" class="list-group-item">Posts</a>
+                                    <a href="" class="list-group-item">Categories</a>
+                                </div>
+                            </div>
+                        @endif
+                    @endif --}}
+                    @if (request()->is('admin/*'))
+                        <div class="col-3">
+                            <div class="list-group">
+                                <a href="{{route('admin.users.index')}}" class="list-group-item">Users</a>
+                                <a href="#" class="list-group-item">Posts</a>
+                                <a href="#" class="list-group-item">Categories</a>
+                            </div>
+                        </div>
+                    @endif
                     <div class="col-9">
                         @yield('content')
                     </div>

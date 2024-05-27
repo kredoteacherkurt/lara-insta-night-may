@@ -6,6 +6,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\UsersController;
 
 Auth::routes();
 
@@ -40,6 +41,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(["as"=>"follow.", "prefix"=>"follow"], function () {
         Route::post('/store/{id}',[FollowController::class, 'store'])->name('store');
         Route::delete('/destroy/{id}',[FollowController::class, 'destroy'])->name('destroy');
+    });
+    Route::group(["as"=>"admin.", "prefix"=>"admin"], function () {
+        Route::get('/users',[UsersController::class,'index'])->name('users.index');
+        Route::delete('/users/{id}/deactivate',[UsersController::class, 'deactivate'])->name('users.deactivate');
+        Route::patch('/users/{id}/activate',[UsersController::class, 'activate'])->name('users.activate');
     });
 
 });

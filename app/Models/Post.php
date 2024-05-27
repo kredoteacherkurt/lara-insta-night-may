@@ -13,7 +13,7 @@ class Post extends Model
         return $this->hasMany(CategoryPost::class);
     }
     public function user(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)->withTrashed();
     }
     public function comments(){
         return $this->hasMany(Comment::class);
